@@ -1,4 +1,5 @@
 from urlparse import parse_qs, urlparse
+from django.conf import settings
 
 from django.db import models
 from django.utils.encoding import smart_unicode
@@ -16,9 +17,9 @@ class Track(models.Model):
     album_name = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     is_approved = models.BooleanField(default=False)
-    sender_name = models.CharField(max_length=255)
-    sender_url = models.CharField(max_length=255)
-    sender_avatar = models.CharField(max_length=255)
+    sender_name = models.CharField(max_length=255, null=True, blank=True)
+    sender_url = models.CharField(max_length=255, null=True, blank=True)
+    sender_avatar = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return smart_unicode(self.title)
@@ -42,11 +43,15 @@ class Track(models.Model):
     def get_youtube_id(self):
         """
         Extracts youtube id from url
-
-        www.youtube.com/watch?v=lIh_wW3iF5o
         """
         parsed = parse_qs(urlparse(self.url).query)
         return parsed.get('v')[0]
+
+    def get_full_url(self):
+        return "%(base)s%(path)s" % {
+            'base': settings.SITE_URL,
+            'path': self.get_absolute_url()
+        }
 
     def serialize(self):
         return {
@@ -60,5 +65,6 @@ class Track(models.Model):
             "sender_avatar": self.sender_avatar,
             "video_url": self.url,
             "youtube_id": self.get_youtube_id(),
-            "absolute_url": self.get_absolute_url()
+            "absolute_url": self.get_absolute_url(),
+            "full_url": self.get_full_url()
         }

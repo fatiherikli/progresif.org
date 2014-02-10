@@ -21,6 +21,7 @@ body {
 }
 
 header {
+    display: none;
     position: absolute;
     background: white;
     padding: 3px 10px;
@@ -35,7 +36,7 @@ header {
 }
 
 #media-control h1 {
-    background: black;
+    background: #ff3d1b;
     color: white;
     float: left;
     margin: 0;
@@ -88,4 +89,59 @@ header {
     font-size: 30px;
     text-align: center;
     color: #0b0b0b;
+}
+
+#actions {
+    width: 300px;
+    position: absolute;
+    bottom: 18px;
+    right: 20px;
+    text-align: right;
+}
+
+#actions span {
+    display: block;
+    float: right;
+    background-color: #ff3d1b;
+    color: white;
+    padding: 4px 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#actions .share {
+    clear: both;
+    padding-top: 20px;
+}
+
+#actions .share a {
+    display: block;
+    float: right;
+    padding: 6px 15px;
+    text-decoration: none;
+    color: black;
+    margin: 3px;
+    font-size: 20px;
+    background-color: white;
+}
+
+#actions .share a:hover {
+    background-color: #1affff;
+    /*color: white;*/
+}
+
+#actions .username {
+    clear: both;
+    display: block;
+    background-color: white;
+    padding: 6px 10px;
+    text-decoration: none;
+    color: #3a3a3a;
+    font-size: 30px;
+    float: right;
+    font-weight: bold;
+}
+
+#actions img {
+    margin: 10px;
 }

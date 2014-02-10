@@ -14,6 +14,12 @@
         maskSelector: ".mask",
         loadingSelector: ".loading",
         playerSelector: "#player",
+        senderSelector: "#sender",
+        twitterShareSelector: ".share .twitter",
+        facebookShareSelector: ".share .facebook",
+
+        twitterShareUrl: "http://twitter.com/home?status=",
+        facebookShareUrl: "https://www.facebook.com/sharer.php?u=",
 
         init: function (options) {
             $.extend(this, options);
@@ -45,10 +51,22 @@
             this.turnOffLights();
             this.player.loadVideoById(response.youtube_id);
             this.player.playVideo();
-            $(this.bandSelector).html(response.band);
-            $(this.trackTitleSelector).html(response.title);
+
             history.pushState(response, response.title, response.absolute_url);
             this.turnOnTimeout = setTimeout(this.turnOnLights.bind(this), 1000);
+
+            $(this.bandSelector).html(response.band);
+            $(this.trackTitleSelector).html(response.title);
+            $(this.senderSelector)
+                .attr("href", response.sender_url)
+                .html("@" + response.sender_name);
+
+            $(this.twitterShareSelector).attr("href", this.twitterShareUrl + this.getShareMessage(response));
+            $(this.facebookShareSelector).attr("href", this.facebookShareUrl + response.full_url);
+        },
+
+        getShareMessage: function (response) {
+            return [response.band, response.title, response.full_url].join(" ")
         },
 
         getNextVideo: function (event) {
