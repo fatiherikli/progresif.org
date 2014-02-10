@@ -1,3 +1,4 @@
+# coding=utf-8
 from urlparse import parse_qs, urlparse
 from django.conf import settings
 
@@ -6,20 +7,33 @@ from django.utils.encoding import smart_unicode
 from django.utils.text import slugify
 
 
+class TrackManager(models.Manager):
+
+    def approved(self):
+        return self.filter(is_approved=True)
+
+    def random(self):
+        return self.approved().order_by('?')
+
+
 class Track(models.Model):
     """
     Holds track data
     """
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name=u"Başlık")
     slug = models.SlugField(max_length=255, blank=True)
-    band = models.CharField(max_length=255)
+    band = models.CharField(max_length=255, verbose_name=u"Grup")
     band_slug = models.SlugField(max_length=255, blank=True)
-    album_name = models.CharField(max_length=255)
-    url = models.CharField(max_length=255)
+    album_name = models.CharField(max_length=255, verbose_name="Albüm",
+                                  blank=True, null=True)
+    url = models.CharField(max_length=255, verbose_name="Youtube url")
     is_approved = models.BooleanField(default=False)
-    sender_name = models.CharField(max_length=255, null=True, blank=True)
+    sender_name = models.CharField(max_length=255, null=True, blank=True,
+                                   verbose_name="Twitter kullanıcı adınız")
     sender_url = models.CharField(max_length=255, null=True, blank=True)
     sender_avatar = models.CharField(max_length=255, null=True, blank=True)
+
+    objects = TrackManager()
 
     def __unicode__(self):
         return smart_unicode(self.title)

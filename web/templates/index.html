@@ -11,6 +11,8 @@
     <img src="{% static "img/logo.png" %}" alt=""/>
 </header>
 
+<div class="success">Parça başarıyla gönderildi. Onaylandıktan sonra yayınlanacaktır.</div>
+
 <div id="actions">
     <span>gönderen</span>
     <a id="sender" href="{{ track.sender_url }}" class="username">@{{ track.sender_name }}</a>
@@ -20,6 +22,15 @@
         <a class="twitter" target="_blank" href="http://twitter.com/home?status={{ track.band }} - {{ track.title }} {{ track.get_full_url }}">twitter'da paylaş</a>
         <a href="#" class="send">siz de gönderin!</a>
     </div>
+</div>
+
+<div id="send-dialog">
+    <form action="{% url "send_track" %}" method="post">
+    {% csrf_token %}
+    {{ send_track_form.as_p }}
+    <a href="#" class="send">gönder</a>
+    <a href="#" class="cancel">iptal</a>
+    </form>
 </div>
 
 <div id="player"></div>

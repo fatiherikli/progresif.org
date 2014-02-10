@@ -17,6 +17,11 @@
         senderSelector: "#sender",
         twitterShareSelector: ".share .twitter",
         facebookShareSelector: ".share .facebook",
+        sendButtonSelector: ".send",
+        cancelButtonSelector: ".cancel",
+        sendDialogSelector: "#send-dialog",
+        sendFormSelector: '#send-dialog form',
+        submitButtonSelector: '#send-dialog .send',
 
         twitterShareUrl: "http://twitter.com/home?status=",
         facebookShareUrl: "https://www.facebook.com/sharer.php?u=",
@@ -96,12 +101,38 @@
             }
         },
 
+        showSendDialog: function (event) {
+            event.preventDefault();
+            $(this.sendDialogSelector).slideDown();
+        },
+
+        hideSendDialog: function (event, callback) {
+            event.preventDefault();
+            $(this.sendDialogSelector).slideUp((callback || function () {}));
+        },
+
+        showSuccessMessage: function () {
+            $('.success').slideDown().delay(2000).slideUp();
+        },
+
+        submitForm: function (event) {
+            var form = $(this.sendFormSelector),
+                serialized = form.serialize();
+            $.post(form.attr("action"), serialized, function () {
+                this.hideSendDialog(event, this.showSuccessMessage);
+            }.bind(this));
+        },
+
         render: function () {
             this.player = this.loadPlayer();
             $(this.nextButtonSelector).on('click', this.getNextVideo.bind(this));
             $(this.prevButtonSelector).on('click', this.getPreviousVideo.bind(this));
             $(this.pauseButtonSelector).on('click', this.pauseVideo.bind(this));
+            $(this.sendButtonSelector).on('click', this.showSendDialog.bind(this));
+            $(this.cancelButtonSelector).on('click', this.hideSendDialog.bind(this));
+            $(this.submitButtonSelector).on('click', this.submitForm.bind(this));
             this.turnOffLights();
+
             setTimeout(this.turnOnLights.bind(this), 3500);
         },
 

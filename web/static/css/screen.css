@@ -36,7 +36,7 @@ header {
 }
 
 #media-control h1 {
-    background: #ff3d1b;
+    background: black;
     color: white;
     float: left;
     margin: 0;
@@ -136,7 +136,7 @@ header {
     background-color: white;
     padding: 6px 10px;
     text-decoration: none;
-    color: #3a3a3a;
+    color: black;
     font-size: 30px;
     float: right;
     font-weight: bold;
@@ -144,4 +144,66 @@ header {
 
 #actions img {
     margin: 10px;
+}
+
+#send-dialog {
+    position: absolute;
+    width: 400px;
+    background-color: black;
+    color: white;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    margin-left: -200px;
+}
+
+#send-dialog label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+#send-dialog form {
+    padding: 10px 60px 30px 30px;
+}
+
+#send-dialog input[type='text'] {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    outline: none;
+}
+
+#send-dialog .send {
+    padding: 10px 20px;
+    font-size: 20px;
+    display: inline-block;
+    background-color: #ff3d1b;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+#send-dialog .cancel {
+    color: #dcdcdc;
+    margin-left: 10px;
+}
+
+.success {
+    z-index: 3;
+    background-color: #fff500;
+    padding: 20px;
+    text-align: center;
+    color: #2b2b2b;
+    font-size: 20px;
+    font-weight: normal;
+    width: 700px;
+    margin: auto;
+    display: none;
+}
+
+#send-dialog {
+    display: none;
 }
