@@ -111,3 +111,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 SITE_URL = "http://progresif.org"
 
+try:
+    from settings_local import *
+except ImportError:
+    pass
+
