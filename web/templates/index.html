@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>{{ track.band }} - {{ track.title }}</title>
+    <link rel="stylesheet" href="{% static "css/screen.css" %}"/>
+</head>
+<body>
+
+<header>
+    <img src="{% static "img/logo.png" %}" alt=""/>
+</header>
+
+<div id="player"></div>
+<div class="mask"></div>
+<div class="loading">GELİYOR</div>
+
+<div id="media-control">
+    <h1>{{ track.band }}</h1>
+    <h2>{{ track.title }}</h2>
+    <div class="controls">
+        <a class="prev" href="#">prev</a>
+        <a class="pause" href="#">pause</a>
+        <a class="next" href="#">next</a>
+    </div>
+</div>
+
+<script src="{% static "js/vendor/jquery.min.js" %}"></script>
+<script src="{% static "js/vendor/jquery.class.min.js" %}"></script>
+<script src="{% static "js/vendor/underscore.js" %}"></script>
+<script src="{% static "js/app.js" %}"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    onYouTubeIframeAPIReady = function () {
+        var player = new progresif.MusicPlayer({
+            youtubeVideoId: "{{ track.get_youtube_id }}",
+            randomTrackUrl: "{% url 'random_track' %}"
+        });
+
+        player.render();
+    }
+</script>
+</body>
+</html>

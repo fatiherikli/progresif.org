@@ -1,0 +1,14 @@
+from django.conf.urls import patterns, include, url
+
+from django.contrib import admin
+
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    # admin
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+
+    # tracks
+    url(r'^', include('tracks.urls')),
+)
