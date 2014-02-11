@@ -79,7 +79,9 @@
                 this.loadVideo(response);
                 this.history.push(response);
             }.bind(this));
-            event.preventDefault();
+            if (event) {
+                event.preventDefault();
+            }
         },
 
         getPreviousVideo: function (event) {
@@ -138,7 +140,12 @@
 
         onPlayerReady: function (event) {
             event.target.playVideo();
-            event.target.mute();
+        },
+
+        onStateChange: function (state) {
+            if (state) {
+                this.getNextVideo();
+            }
         },
 
         loadPlayer: function () {
@@ -147,7 +154,8 @@
               width: '100%',
               videoId: this.youtubeVideoId,
               events: {
-                'onReady': this.onPlayerReady
+                'onReady': this.onPlayerReady,
+                'onStateChange': this.onStateChange
               },
               playerVars: {
                   controls: 0,
