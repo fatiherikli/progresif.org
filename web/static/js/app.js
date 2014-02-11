@@ -143,7 +143,7 @@
         },
 
         onStateChange: function (state) {
-            if (state) {
+            if (state == 0) {
                 this.getNextVideo();
             }
         },
@@ -155,7 +155,7 @@
               videoId: this.youtubeVideoId,
               events: {
                 'onReady': this.onPlayerReady,
-                'onStateChange': this.onStateChange
+                'onStateChange': this.onStateChange.bind(this)
               },
               playerVars: {
                   controls: 0,
