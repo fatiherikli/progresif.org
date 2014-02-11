@@ -142,8 +142,8 @@
             event.target.playVideo();
         },
 
-        onStateChange: function (state) {
-            if (state == 0) {
+        onStateChange: function (event) {
+            if (event.data == 0) {
                 this.getNextVideo();
             }
         },
