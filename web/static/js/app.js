@@ -66,7 +66,7 @@
                 .attr("href", response.sender_url)
                 .html("@" + response.sender_name);
 
-            window.title = response.band + " | " | response.title;
+            window.document.title = response.band + " - " + response.title;
 
             $(this.twitterShareSelector).attr("href", this.twitterShareUrl + this.getShareMessage(response));
             $(this.facebookShareSelector).attr("href", this.facebookShareUrl + response.full_url);
