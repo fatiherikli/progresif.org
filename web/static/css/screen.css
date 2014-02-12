@@ -61,6 +61,10 @@ header {
     text-indent: -9999px;
 }
 
+#media-control .controls {
+    clear: both;
+}
+
 #media-control a.prev {
     background-image: url(../img/prev.png);
 }

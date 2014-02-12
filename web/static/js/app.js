@@ -94,14 +94,16 @@
         },
 
         pauseVideo: function (event) {
-            $(this.pauseButtonSelector).toggleClass("paused");
+            var button = $(this.pauseButtonSelector);
             event.preventDefault();
             if (this.paused) {
                 this.player.playVideo();
                 this.paused = false;
+                button.addClass('paused');
             } else {
                 this.player.pauseVideo();
                 this.paused = true;
+                button.removeClass('paused');
             }
         },
 
