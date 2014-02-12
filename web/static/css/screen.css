@@ -49,6 +49,7 @@ header {
     padding: 8px 30px;
     font-size: 40px;
     margin: 0;
+    float: left;
     /*margin-bottom: 3px;*/
 }
 
