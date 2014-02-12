@@ -82,3 +82,8 @@ class Track(models.Model):
             "absolute_url": self.get_absolute_url(),
             "full_url": self.get_full_url()
         }
+
+    def get_thumbnail_url(self):
+        return 'http://img.youtube.com/vi/%(youtube_id)s/0.jpg' % {
+            'youtube_id': self.get_youtube_id()
+        }

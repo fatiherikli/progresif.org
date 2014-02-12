@@ -4,6 +4,7 @@
     {% load static %}
     <title>{{ track.band }} - {{ track.title }}</title>
     <link rel="stylesheet" href="{% static "css/screen.css" %}"/>
+    <meta property="og:image" content="{{ track.get_thumbnail_url }}" />
 </head>
 <body>
 
